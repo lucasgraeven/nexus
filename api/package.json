@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/cors": "latest",
     "@types/express": "latest",
+    "@types/pg": "^8.20.0",
     "typescript": "latest"
   }
 }
