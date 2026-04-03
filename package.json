@@ -1,0 +1,13 @@
+{
+  "name": "nexus",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"cd api && bun dev\" \"cd frontend && bun tauri dev\"",
+    "dev:frontend": "cd frontend && bun tauri dev",
+    "dev:api": "cd api && bun dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
