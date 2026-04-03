@@ -1,17 +1,25 @@
+import { makeStyles, tokens, Text } from "@fluentui/react-components";
+
+const useStyles = makeStyles({
+  title: {
+    fontSize: "24px",
+    fontWeight: "700",
+    marginBottom: "8px",
+    color: tokens.colorNeutralForeground1,
+  },
+  subtitle: { color: tokens.colorNeutralForeground3 },
+});
+
 function Projects() {
+  const styles = useStyles();
   return (
     <div>
-      <h1
-        style={{
-          color: "#fff",
-          fontSize: "24px",
-          fontWeight: 700,
-          marginBottom: "8px",
-        }}
-      >
+      <Text block className={styles.title}>
         Projects
-      </h1>
-      <p style={{ color: "#888" }}>Your projects will appear here.</p>
+      </Text>
+      <Text block className={styles.subtitle}>
+        Your projects will appear here.
+      </Text>
     </div>
   );
 }

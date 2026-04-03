@@ -7,15 +7,21 @@ import {
   NavDrawerBody,
   NavItem,
   NavDrawerHeader,
+  NavDrawerFooter,
   AppItem,
+  Button,
 } from "@fluentui/react-components";
 import {
   Grid20Regular,
   Folder20Regular,
   People20Regular,
   TaskListSquareLtr20Regular,
+  WeatherMoon20Regular,
+  WeatherSunny20Regular,
 } from "@fluentui/react-icons";
-import logo from "../assets/logo.svg";
+import logoDark from "../assets/logo-dark.svg";
+import logoLight from "../assets/logo-light.svg";
+import { useTheme } from "../contexts/ThemeContext";
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +39,9 @@ const useStyles = makeStyles({
     padding: "32px",
     backgroundColor: tokens.colorNeutralBackground1,
   },
+  footer: {
+    padding: "12px",
+  },
 });
 
 const navItems = [
@@ -46,6 +55,7 @@ function Layout() {
   const styles = useStyles();
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <div className={styles.root}>
@@ -57,17 +67,50 @@ function Layout() {
         onNavItemSelect={(_, data) => navigate(data.value as string)}
       >
         <NavDrawerHeader>
-          <AppItem icon={<img src={logo} width={20} height={20} alt="Nexus" />}>
+          <AppItem
+            icon={
+              <img
+                src={isDark ? logoDark : logoLight}
+                width={20}
+                height={20}
+                alt="Nexus"
+              />
+            }
+          >
             Nexus
           </AppItem>
         </NavDrawerHeader>
         <NavDrawerBody>
           {navItems.map(({ to, label, icon }) => (
-            <NavItem key={to} value={to} icon={icon}>
+            <NavItem
+              key={to}
+              value={to}
+              icon={
+                <span
+                  style={{
+                    color:
+                      location.pathname === to
+                        ? tokens.colorBrandForegroundLink
+                        : "inherit",
+                  }}
+                >
+                  {icon}
+                </span>
+              }
+            >
               {label}
             </NavItem>
           ))}
         </NavDrawerBody>
+        <NavDrawerFooter className={styles.footer}>
+          <Button
+            appearance="subtle"
+            icon={isDark ? <WeatherSunny20Regular /> : <WeatherMoon20Regular />}
+            onClick={toggleTheme}
+          >
+            {isDark ? "Light mode" : "Dark mode"}
+          </Button>
+        </NavDrawerFooter>
       </NavDrawer>
 
       <main className={styles.main}>
